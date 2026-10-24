@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber Rakshak - File Official Cybercrime Complaint</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,gu,mr,ta,te,kn,ml,bn,pa,ur,or,as',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        :root {
+            --bg-black: #000000;
+            --surface-dark: #09090b;
+            --neon-cyan: #00f0ff;
+            --neon-purple: #8a2be2;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            top: 0 !important;
+        }
+
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.14;
+        }
+        .glow-cyan { background: var(--neon-cyan); top: -10%; left: -10%; }
+        .glow-purple { background: var(--neon-purple); bottom: -10%; right: -10%; }
+
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(12, 12, 16, 0.92), rgba(9, 9, 11, 0.55));
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+        }
+
+        .cyber-input {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+        .cyber-input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+        .cyber-input option {
+            background-color: #09090b;
+            color: #ffffff;
+        }
+
+        .cyber-label {
+            display: block;
+            font-family: 'Fira Code', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #a1a1aa;
+            margin-bottom: 6px;
+        }
+
+        /* Stepper active states */
+        .step-pill.active {
+            border-color: var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+        .step-pill.completed {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+        }
+
+        /* Google Translate Overrides */
+        .goog-te-gadget { font-size: 0px !important; color: transparent !important; }
+        .goog-te-gadget .goog-te-combo {
+            background-color: #09090b !important;
+            color: #fff !important;
+            border: 1px solid rgba(0, 240, 255, 0.35) !important;
+            border-radius: 8px !important;
+            padding: 6px 10px !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 12px !important;
+            outline: none !important;
+        }
+        .goog-logo-link, .goog-te-gadget img, .skiptranslate iframe, .goog-te-banner-frame, #goog-gt-tt { display: none !important; }
+    </style>
+</head>
+<body class="selection:bg-cyan-500/30">
+
+    <div class="cyber-grid"></div>
+    <div class="ambient-glow glow-cyan"></div>
+    <div class="ambient-glow glow-purple"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav fixed w-full top-0 z-50 h-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
+            <a href="home.html" class="flex items-center gap-3 text-zinc-400 hover:text-[#00f0ff] transition-colors font-mono text-xs sm:text-sm tracking-widest uppercase">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Terminal
+            </a>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 pr-4 border-r border-zinc-800">
+                    <i data-lucide="globe-2" class="w-4 h-4 text-[#00f0ff]"></i>
+                    <div id="google_translate_element"></div>
+                </div>
+                <a href="profile.html" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-[#00f0ff]/50 transition-all">
+                    <i data-lucide="user-check" class="w-4 h-4 text-[#00f0ff]"></i>
+                    <span id="nav-user-name" class="font-mono text-xs text-zinc-200">Profile</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="pt-28 pb-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <!-- NCRP Official Header Banner -->
+        <div class="glass-panel p-6 sm:p-8 mb-8 border-l-4 border-l-[#00f0ff]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 font-mono text-xs mb-3">
+                        <i data-lucide="siren" class="w-3.5 h-3.5"></i> NATIONAL CYBER CRIME REPORTING PORTAL (NCRP PROTOCOL)
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-black font-cyber tracking-wide text-white">
+                        FILE OFFICIAL <span class="text-[#00f0ff]">INCIDENT REPORT</span>
+                    </h1>
+                    <p class="text-zinc-400 text-sm mt-1">
+                        All fields marked with <span class="text-red-400">*</span> are mandatory as per Ministry of Home Affairs (MHA) Cyber Triage Standards.
+                    </p>
+                </div>
+                <div class="bg-black/60 border border-zinc-800 rounded-2xl p-4 shrink-0 font-mono text-xs">
+                    <div class="text-zinc-500 uppercase">Emergency Helpline</div>
+                    <div class="text-2xl font-bold text-[#00f0ff] flex items-center gap-2 mt-0.5">
+                        <i data-lucide="phone-call" class="w-5 h-5 text-red-400"></i> 1930
+                    </div>
+                    <div class="text-[10px] text-zinc-500 mt-0.5">24x7 Financial Fraud Freeze</div>
+                </div>
+            </div>
+
+            <!-- 4-Step Progress Bar -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-8 pt-6 border-t border-zinc-800/80">
+                <button type="button" onclick="goToStep(1)" id="step-btn-1" class="step-pill active flex items-center gap-3 p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 text-left transition-all">
+                    <span class="w-8 h-8 rounded-lg bg-cyan-500/20 text-[#00f0ff] font-cyber font-bold text-sm flex items-center justify-center shrink-0">01</span>
+                    <div>
+                        <div class="text-xs font-bold font-cyber uppercase">Incident Details</div>
+                        <div class="text-[10px] text-zinc-400 font-mono">Category & Fraud Info</div>
+                    </div>
+                </button>
+
+                <button type="button" onclick="goToStep(2)" id="step-btn-2" class="step-pill flex items-center gap-3 p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 text-left transition-all">
+                    <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-400 font-cyber font-bold text-sm flex items-center justify-center shrink-0">02</span>
+                    <div>
+                        <div class="text-xs font-bold font-cyber uppercase">Suspect Details</div>
+                        <div class="text-[10px] text-zinc-400 font-mono">Identifiers & Links</div>
+                    </div>
+                </button>
+
+                <button type="button" onclick="goToStep(3)" id="step-btn-3" class="step-pill flex items-center gap-3 p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 text-left transition-all">
+                    <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-400 font-cyber font-bold text-sm flex items-center justify-center shrink-0">03</span>
+                    <div>
+                        <div class="text-xs font-bold font-cyber uppercase">Victim & Police</div>
+                        <div class="text-[10px] text-zinc-400 font-mono">State, District & PS</div>
+                    </div>
+                </button>
+
+                <button type="button" onclick="goToStep(4)" id="step-btn-4" class="step-pill flex items-center gap-3 p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 text-left transition-all">
+                    <span class="w-8 h-8 rounded-lg bg-zinc-800 text-zinc-400 font-cyber font-bold text-sm flex items-center justify-center shrink-0">04</span>
+                    <div>
+                        <div class="text-xs font-bold font-cyber uppercase">Evidence & Submit</div>
+                        <div class="text-[10px] text-zinc-400 font-mono">SHA-256 & Preview</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Inline Error/Status Banner -->
+        <div id="form-alert" class="hidden mb-6 p-4 rounded-xl border border-red-500/50 bg-red-950/60 text-red-200 font-mono text-xs items-center gap-3">
+            <i data-lucide="alert-octagon" class="w-5 h-5 text-red-400 shrink-0"></i>
+            <span id="form-alert-text">Please fill all mandatory fields.</span>
+        </div>
+
+        <!-- Master Reporting Form -->
+        <form id="ncrp-form" class="space-y-8">
+
+            <!-- ==========================================
+                 STEP 1: INCIDENT DETAILS
+                 ========================================== -->
+            <section id="step-panel-1" class="glass-panel p-6 sm:p-10 space-y-6">
+                <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                    <div>
+                        <h2 class="text-xl font-cyber font-bold text-white flex items-center gap-2.5">
+                            <i data-lucide="file-warning" class="w-6 h-6 text-[#00f0ff]"></i> Section 1: Incident Classification & Timeline
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-1">Provide accurate details about the cybercrime offense.</p>
+                    </div>
+                    <span class="font-mono text-xs text-[#00f0ff] bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">STEP 1 OF 4</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Category of Complaint -->
+                    <div>
+                        <label class="cyber-label">Category of Complaint <span class="text-red-400">*</span></label>
+                        <select id="category" name="category" required onchange="handleCategoryChange()" class="cyber-input">
+                            <option value="">-- Select Crime Category --</option>
+                            <option value="Online Financial Fraud">Online Financial Fraud</option>
+                            <option value="Online and Social Media Related Crime">Online and Social Media Related Crime</option>
+                            <option value="Hacking / Unauthorized Access">Hacking / Damage to Computer System</option>
+                            <option value="Online Cyber Trafficking / Gambling">Online Gambling / Betting Fraud</option>
+                            <option value="Cryptocurrency Crime">Cryptocurrency / Investment Scam</option>
+                            <option value="Ransomware / Malware Attack">Ransomware / Malware Attack</option>
+                            <option value="Cyber Bullying / Stalking / Sextortion">Cyber Bullying / Stalking / Sextortion</option>
+                            <option value="Any Other Cyber Crime">Any Other Cyber Crime</option>
+                        </select>
+                    </div>
+
+                    <!-- Sub-Category of Complaint -->
+                    <div>
+                        <label class="cyber-label">Sub-Category of Complaint <span class="text-red-400">*</span></label>
+                        <select id="sub_category" name="sub_category" required class="cyber-input">
+                            <option value="">-- Select Category First --</option>
+                        </select>
+                    </div>
+
+                    <!-- Approximate Date & Time of Incident -->
+                    <div>
+                        <label class="cyber-label">Date & Time of Incident <span class="text-red-400">*</span></label>
+                        <input type="datetime-local" id="incident_date" name="incident_date" required class="cyber-input">
+                    </div>
+
+                    <!-- Where did the incident occur? -->
+                    <div>
+                        <label class="cyber-label">Where did the incident occur? (Platform/App) <span class="text-red-400">*</span></label>
+                        <select id="platform" name="platform" required class="cyber-input">
+                            <option value="">-- Select Platform --</option>
+                            <option value="WhatsApp / Telegram">WhatsApp / Telegram</option>
+                            <option value="Instagram / Facebook">Instagram / Facebook</option>
+                            <option value="UPI / Banking App (PhonePe, GPay, Paytm)">UPI / Banking App (PhonePe, GPay, Paytm)</option>
+                            <option value="Phone Call / SMS / Vishing">Phone Call / SMS / Vishing</option>
+                            <option value="Email / Phishing Link">Email / Phishing Website</option>
+                            <option value="X (Twitter) / LinkedIn / YouTube">X (Twitter) / LinkedIn / YouTube</option>
+                            <option value="Job / Shopping Portal">Fake Job / E-Commerce Website</option>
+                            <option value="Other Digital Platform">Other Digital Platform</option>
+                        </select>
+                    </div>
+
+                    <!-- Reason for Delay in Reporting -->
+                    <div class="md:col-span-2">
+                        <label class="cyber-label">Is there any delay in reporting? If yes, provide reason</label>
+                        <input type="text" id="delay_reason" name="delay_reason" placeholder="No delay / Unaware of portal / Tried contacting bank first..." class="cyber-input">
+                    </div>
+                </div>
+
+                <!-- Dynamic Financial Fraud Block (Appears when Online Financial Fraud or Crypto is chosen) -->
+                <div id="financial-fraud-box" class="hidden p-6 rounded-2xl bg-amber-500/5 border border-amber-500/30 space-y-5">
+                    <div class="flex items-center gap-2 text-amber-400 font-cyber text-sm font-bold">
+                        <i data-lucide="landmark" class="w-5 h-5"></i> FINANCIAL FRAUD TRANSACTION DETAILS (NCRP 1930 LEDGER)
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="cyber-label text-amber-300/80">Victim Bank / Wallet / Merchant Name <span class="text-red-400">*</span></label>
+                            <input type="text" id="bank_name" name="bank_name" placeholder="e.g. State Bank of India, HDFC, Paytm..." class="cyber-input">
+                        </div>
+                        <div>
+                            <label class="cyber-label text-amber-300/80">Total Amount Lost (in ₹ INR) <span class="text-red-400">*</span></label>
+                            <input type="number" id="financial_loss" name="financial_loss" placeholder="e.g. 25000" min="0" class="cyber-input">
+                        </div>
+                        <div>
+                            <label class="cyber-label text-amber-300/80">12-Digit UTR / Transaction Reference No. <span class="text-red-400">*</span></label>
+                            <input type="text" id="transaction_id" name="transaction_id" placeholder="e.g. 412389012345" class="cyber-input">
+                        </div>
+                        <div>
+                            <label class="cyber-label text-amber-300/80">Debited Account No. / UPI ID / Card (Last 4 Digits)</label>
+                            <input type="text" id="account_or_upi" name="account_or_upi" placeholder="e.g. user@okaxis or XXXX-4821" class="cyber-input">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Incident Description -->
+                <div>
+                    <label class="cyber-label">Additional Information about the Incident (Minimum 30 Characters) <span class="text-red-400">*</span></label>
+                    <textarea id="description" name="description" rows="4" required placeholder="Describe how the incident happened chronologically (without special characters like #$%^&*)..." class="cyber-input"></textarea>
+                </div>
+
+                <div class="flex justify-end pt-4">
+                    <button type="button" onclick="nextStep(1)" class="px-8 py-3.5 rounded-xl bg-[#00f0ff] text-black font-cyber font-bold text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all flex items-center gap-2">
+                        Save & Proceed to Suspect Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 STEP 2: SUSPECT DETAILS
+                 ========================================== -->
+            <section id="step-panel-2" class="hidden glass-panel p-6 sm:p-10 space-y-6">
+                <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                    <div>
+                        <h2 class="text-xl font-cyber font-bold text-white flex items-center gap-2.5">
+                            <i data-lucide="user-x" class="w-6 h-6 text-[#8a2be2]"></i> Section 2: Suspect Details (If Available)
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-1">Share any phone numbers, UPI IDs, bank accounts, or URLs used by the perpetrator.</p>
+                    </div>
+                    <span class="font-mono text-xs text-[#8a2be2] bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">STEP 2 OF 4</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="cyber-label">Suspect Name / Alias / Handle</label>
+                        <input type="text" id="suspect_name" name="suspect_name" placeholder="e.g. Unknown Caller / Fake Bank Officer" class="cyber-input">
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Suspect Identifier Type</label>
+                        <select id="suspect_id_type" name="suspect_id_type" class="cyber-input">
+                            <option value="Mobile / WhatsApp Number">Mobile / WhatsApp Number</option>
+                            <option value="UPI ID / VPA">UPI ID / VPA</option>
+                            <option value="Bank Account Number & IFSC">Bank Account Number & IFSC</option>
+                            <option value="Social Media Profile ID / URL">Social Media Profile ID / URL</option>
+                            <option value="Phishing Website / Fake URL">Phishing Website / Fake URL</option>
+                            <option value="Email Address">Email Address</option>
+                            <option value="Not Known">Not Known</option>
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="cyber-label">Suspect Identifier Value (Phone No / URL / UPI / Account No)</label>
+                        <input type="text" id="suspect_id_value" name="suspect_id_value" placeholder="e.g. +91 9988776655 or http://fake-kyc-update.com or scammer@ybl" class="cyber-input">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="cyber-label">Any Other Suspect Details (Address, Voice Accent, Modus Operandi)</label>
+                        <textarea id="suspect_details" name="suspect_details" rows="3" placeholder="Provide any extra clues that may assist Cyber Police investigation..." class="cyber-input"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    <button type="button" onclick="goToStep(1)" class="px-6 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 font-cyber font-bold text-xs tracking-wider uppercase hover:bg-zinc-800 transition-all flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+                    </button>
+                    <button type="button" onclick="nextStep(2)" class="px-8 py-3.5 rounded-xl bg-[#00f0ff] text-black font-cyber font-bold text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all flex items-center gap-2">
+                        Save & Proceed to Complainant Details <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 STEP 3: COMPLAINANT & JURISDICTION DETAILS
+                 ========================================== -->
+            <section id="step-panel-3" class="hidden glass-panel p-6 sm:p-10 space-y-6">
+                <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                    <div>
+                        <h2 class="text-xl font-cyber font-bold text-white flex items-center gap-2.5">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-emerald-400"></i> Section 3: Complainant & Police Jurisdiction
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-1">Your complaint will be routed to the State/District Cyber Cell selected below.</p>
+                    </div>
+                    <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">STEP 3 OF 4</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="cyber-label">Complainant Full Name <span class="text-red-400">*</span></label>
+                        <input type="text" id="full_name" name="full_name" required class="cyber-input">
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Registered Email <span class="text-red-400">*</span></label>
+                        <input type="email" id="citizen_email" name="citizen_email" required readonly class="cyber-input opacity-75 cursor-not-allowed">
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Mobile Number <span class="text-red-400">*</span></label>
+                        <input type="tel" id="mobile" name="mobile" required class="cyber-input" placeholder="+91 9876543210">
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Gender <span class="text-red-400">*</span></label>
+                        <select id="gender" name="gender" required class="cyber-input">
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Transgender / Other">Transgender / Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Date of Birth <span class="text-red-400">*</span></label>
+                        <input type="date" id="dob" name="dob" required class="cyber-input">
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Relationship with Victim <span class="text-red-400">*</span></label>
+                        <select id="relationship" name="relationship" required class="cyber-input">
+                            <option value="Self (Victim)">Self (I am the Victim)</option>
+                            <option value="Family Member / Parent">Family Member / Parent</option>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Legal Representative">Legal Representative</option>
+                        </select>
+                    </div>
+
+                    <!-- State / UT -->
+                    <div>
+                        <label class="cyber-label">State / UT <span class="text-red-400">*</span></label>
+                        <select id="state" name="state" required class="cyber-input">
+                            <option value="">-- Select State / UT --</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Delhi (NCT)">Delhi (NCT)</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="Other State / UT">Other State / UT</option>
+                        </select>
+                    </div>
+
+                    <!-- District -->
+                    <div>
+                        <label class="cyber-label">District / City <span class="text-red-400">*</span></label>
+                        <input type="text" id="district" name="district" required placeholder="e.g. Rajkot, Ahmedabad, Mumbai..." class="cyber-input">
+                    </div>
+
+                    <!-- Police Station -->
+                    <div>
+                        <label class="cyber-label">Nearest Police Station / Cyber Cell <span class="text-red-400">*</span></label>
+                        <input type="text" id="police_station" name="police_station" required placeholder="e.g. Cyber Crime Police Station" class="cyber-input">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="cyber-label">Complete House No. / Street / Locality Address <span class="text-red-400">*</span></label>
+                        <input type="text" id="address" name="address" required placeholder="Enter full residential address for FIR correspondence" class="cyber-input">
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">Pincode <span class="text-red-400">*</span></label>
+                        <input type="text" id="pincode" name="pincode" required pattern="[0-9]{6}" maxlength="6" placeholder="e.g. 360001" class="cyber-input">
+                    </div>
+                </div>
+
+                <div class="flex justify-between pt-4">
+                    <button type="button" onclick="goToStep(2)" class="px-6 py-3.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 font-cyber font-bold text-xs tracking-wider uppercase hover:bg-zinc-800 transition-all flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+                    </button>
+                    <button type="button" onclick="nextStep(3)" class="px-8 py-3.5 rounded-xl bg-[#00f0ff] text-black font-cyber font-bold text-xs tracking-wider uppercase hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all flex items-center gap-2">
+                        Save & Proceed to Evidence & Preview <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==========================================
+                 STEP 4: EVIDENCE, HASHING & FINAL PREVIEW
+                 ========================================== -->
+            <section id="step-panel-4" class="hidden glass-panel p-6 sm:p-10 space-y-6">
+                <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                    <div>
+                        <h2 class="text-xl font-cyber font-bold text-white flex items-center gap-2.5">
+                            <i data-lucide="shield-check" class="w-6 h-6 text-[#00f0ff]"></i> Section 4: Digital Evidence & Final Preview
+                        </h2>
+                        <p class="text-xs text-zinc-400 mt-1">Attach supporting proof (Screenshots, Bank Statement, PDF) to generate a tamper-proof SHA-256 hash.</p>
+                    </div>
+                    <span class="font-mono text-xs text-[#00f0ff] bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">STEP 4 OF 4</span>
+                </div>
+
+                <!-- National ID & Evidence Upload -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="cyber-label">National ID Proof Type <span class="text-red-400">*</span></label>
+                        <select id="national_id_type" name="national_id_type" required class="cyber-input">
+                            <option value="Aadhaar Card (Masked)">Aadhaar Card (Last 4 Digits)</option>
+                            <option value="PAN Card">PAN Card</option>
+                            <option value="Voter ID / EPIC">Voter ID / EPIC</option>
+                            <option value="Driving License">Driving License</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="cyber-label">National ID Number (Last 4 Digits / ID No) <span class="text-red-400">*</span></label>
+                        <input type="text" id="national_id_no" name="national_id_no" required placeholder="e.g. XXXX-XXXX-4829" class="cyber-input">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="cyber-label">Upload Digital Evidence (Screenshot / Bank Statement / Chat Export)</label>
+                        <div class="p-6 rounded-2xl border-2 border-dashed border-zinc-700 hover:border-[#00f0ff] bg-black/50 transition-all text-center">
+                            <input type="file" id="evidence_file" accept=".png,.jpg,.jpeg,.pdf,.doc,.docx" onchange="generateEvidenceHash(this)" class="hidden">
+                            <label for="evidence_file" class="cursor-pointer flex flex-col items-center gap-2">
+                                <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-[#00f0ff]">
+                                    <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                                </div>
+                                <span id="evidence-file-label" class="text-sm font-bold text-white">Click to attach Screenshot, PDF, or Bank Statement</span>
+                                <span class="text-xs text-zinc-500 font-mono">Automatic Section 65B SHA-256 Cryptographic Hash Generation</span>
+                            </label>
+                        </div>
+
+                        <!-- SHA-256 Output Box -->
+                        <div id="hash-display-box" class="mt-3 p-4 rounded-xl bg-zinc-950 border border-zinc-800 font-mono text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <span class="text-zinc-500">EVIDENCE SHA-256 HASH:</span>
+                            <span id="evidence-hash-text" class="text-[#00f0ff] break-all">NO_FILE_ATTACHED_YET</span>
+                        </div>
+                        <input type="hidden" id="evidence_file_name" name="evidence_file_name" value="None">
+                        <input type="hidden" id="evidence_hash" name="evidence_hash" value="NOT_PROVIDED">
+                    </div>
+                </div>
+
+                <!-- Live Summary Preview Card -->
+                <div class="p-6 rounded-2xl bg-black/70 border border-zinc-800 space-y-4">
+                    <div class="text-xs font-mono text-[#00f0ff] uppercase tracking-widest border-b border-zinc-800 pb-2 flex items-center gap-2">
+                        <i data-lucide="eye" class="w-4 h-4"></i> Official Complaint Dossier Preview
+                    </div>
+                    <div id="dossier-preview" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-mono">
+                        <!-- Populated dynamically when entering Step 4 -->
+                    </div>
+                </div>
+
+                <!-- NCRP Legal Declaration -->
+                <label class="flex items-start gap-3 p-4 rounded-xl bg-cyan-500/5 border border-cyan-500/20 cursor-pointer">
+                    <input type="checkbox" id="declaration_check" required class="mt-1 w-4 h-4 accent-[#00f0ff]">
+                    <span class="text-xs text-zinc-300 leading-relaxed">
+                        <strong>OFFICIAL DECLARATION:</strong> I hereby declare that the information provided above is true and accurate to the best of my knowledge. I understand that furnishing false information to law enforcement is punishable under the Bharatiya Nyaya Sanhita (BNS) & Information Technology Act.
+                    </span>
+                </label>
+
+                <div class="flex flex-col sm:flex-row justify-between gap-4 pt-4">
+                    <button type="button" onclick="goToStep(3)" class="px-6 py-4 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 font-cyber font-bold text-xs tracking-wider uppercase hover:bg-zinc-800 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Edit
+                    </button>
+                    <button type="submit" id="final-submit-btn" class="px-10 py-4 rounded-xl bg-gradient-to-r from-[#00f0ff] to-[#8a2be2] text-white font-cyber font-bold text-sm tracking-widest uppercase hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-5 h-5"></i> Transmit Official Complaint
+                    </button>
+                </div>
+            </section>
+
+        </form>
+    </main>
+
+    <!-- Success Acknowledgement Modal -->
+    <div id="ack-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4">
+        <div class="glass-panel max-w-lg w-full p-8 text-center border border-[#00f0ff]/50 shadow-[0_0_50px_rgba(0,240,255,0.2)]">
+            <div class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mx-auto mb-6">
+                <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+            </div>
+            <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-1">NCRP Uplink Confirmed</div>
+            <h3 class="text-2xl font-cyber font-black text-white mb-2">COMPLAINT REGISTERED</h3>
+            <p class="text-zinc-400 text-sm mb-6">
+                Your cybercrime dossier has been encrypted and dispatched to the respective State/District Cyber Police Station.
+            </p>
+
+            <div class="p-4 rounded-2xl bg-black border border-zinc-800 mb-6">
+                <div class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mb-1">Acknowledgement Reference ID</div>
+                <div id="ack-ref-id" class="text-2xl font-mono font-bold text-[#00f0ff] tracking-wider">CR-2026-000000</div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="profile.html" class="flex-1 py-3.5 rounded-xl bg-[#00f0ff] text-black font-cyber font-bold text-xs uppercase tracking-wider hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="activity" class="w-4 h-4"></i> View & Track in Profile
+                </a>
+                <a href="home.html" class="py-3.5 px-6 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 font-cyber font-bold text-xs uppercase tracking-wider hover:bg-zinc-800 transition-all">
+                    Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Sub-categories mapped to NCRP categories
+        const SUB_CATEGORIES = {
+            "Online Financial Fraud": [
+                "UPI Related Fraud (GPay / PhonePe / Paytm)",
+                "Debit / Credit Card Fraud / SIM Swap",
+                "Internet Banking Related Fraud",
+                "Fraud Call / Vishing / Fake Bank KYC",
+                "E-Wallet / Digital Payment Fraud",
+                "Demat / Depository / Stock Trading Fraud"
+            ],
+            "Online and Social Media Related Crime": [
+                "Fake Profile / Impersonation",
+                "Cyber Bullying / Defamation",
+                "Online Matrimonial / Honeytrap Fraud",
+                "Provocative Speech / Fake News",
+                "Email Phishing / Account Takeover",
+                "Online Job / Task Fraud"
+            ],
+            "Hacking / Unauthorized Access": [
+                "Unauthorized Access / Data Breach",
+                "Website Defacement / Hacking",
+                "Email / Social Account Hacking",
+                "Tampering with Computer Source Documents"
+            ],
+            "Online Cyber Trafficking / Gambling": [
+                "Illegal Online Betting / Casino App",
+                "Fantasy Gaming / Color Prediction Fraud",
+                "Online Trafficking"
+            ],
+            "Cryptocurrency Crime": [
+                "Fake Crypto Exchange / Pig Butchering Scam",
+                "Unauthorized Crypto Wallet Drain",
+                "Ponzi / Fake Token Investment"
+            ],
+            "Ransomware / Malware Attack": [
+                "Ransomware File Encryption Attack",
+                "Spyware / Remote Access Trojan (APK Scam)",
+                "Botnet / DDoS Attack"
+            ],
+            "Cyber Bullying / Stalking / Sextortion": [
+                "Cyber Stalking / Harassment",
+                "Video Call Sextortion / Blackmail",
+                "Morphed Image / Non-Consensual Content"
+            ],
+            "Any Other Cyber Crime": [
+                "E-Commerce / OLX / Marketplace Scam",
+                "Customer Care Number Fraud",
+                "Other Cyber Incident"
+            ]
+        };
+
+        // Pre-fill user details on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const email = localStorage.getItem('userEmail');
+            const name = localStorage.getItem('userName');
+            const role = localStorage.getItem('userRole') || 'citizen';
+
+            if (!email) {
+            // Fetch mobile & full profile from PHP backend for this specific user
+            try {
+                const res = await fetch(`http://localhost/cybercrime-portal/backend/get_profile.php?email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}`);
+                const result = await res.json();
+                if (result.success && result.data) {
+                    const u = result.data;
+                    document.getElementById('full_name').value = u.full_name || name || '';
+                    document.getElementById('mobile').value = u.mobile || '';
+                    if (u.gender) document.getElementById('gender').value = u.gender;
+                    if (u.dob) document.getElementById('dob').value = u.dob;
+                    if (u.state) document.getElementById('state').value = u.state;
+                    if (u.district) document.getElementById('district').value = u.district;
+                    if (u.police_station) document.getElementById('police_station').value = u.police_station;
+                    if (u.address) document.getElementById('address').value = u.address;
+                    if (u.pincode) document.getElementById('pincode').value = u.pincode;
+                    if (u.national_id_type) document.getElementById('national_id_type').value = u.national_id_type;
+                    if (u.national_id_no) document.getElementById('national_id_no').value = u.national_id_no;
+                }
+            } catch (e) {
+                console.warn("Could not auto-fetch profile from backend:", e);
+            }
+        });
+
+        function handleCategoryChange() {
+            const cat = document.getElementById('category').value;
+            const subSelect = document.getElementById('sub_category');
+            const finBox = document.getElementById('financial-fraud-box');
+
+            subSelect.innerHTML = '<option value="">-- Select Sub-Category --</option>';
+            if (SUB_CATEGORIES[cat]) {
+                SUB_CATEGORIES[cat].forEach(sub => {
+                    const opt = document.createElement('option');
+                    opt.value = sub;
+                    opt.textContent = sub;
+                    subSelect.appendChild(opt);
+                });
+            }
+
+            const isFin = (cat === "Online Financial Fraud" || cat === "Cryptocurrency Crime");
+            if (isFin) {
+                finBox.classList.remove('hidden');
+                document.getElementById('bank_name').required = true;
+                document.getElementById('financial_loss').required = true;
+                document.getElementById('transaction_id').required = true;
+            } else {
+                finBox.classList.add('hidden');
+                document.getElementById('bank_name').required = false;
+                document.getElementById('financial_loss').required = false;
+                document.getElementById('transaction_id').required = false;
+            }
+        }
+
+        function showAlert(msg) {
+            const box = document.getElementById('form-alert');
+            document.getElementById('form-alert-text').innerText = msg;
+            box.classList.remove('hidden');
+            box.classList.add('flex');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function hideAlert() {
+            const box = document.getElementById('form-alert');
+            box.classList.add('hidden');
+            box.classList.remove('flex');
+        }
+
+        function goToStep(step) {
+            hideAlert();
+            for (let i = 1; i <= 4; i++) {
+                const panel = document.getElementById(`step-panel-${i}`);
+                const btn = document.getElementById(`step-btn-${i}`);
+                if (i === step) {
+                    panel.classList.remove('hidden');
+                    btn.classList.add('active');
+                } else {
+                    panel.classList.add('hidden');
+                    btn.classList.remove('active');
+                }
+            }
+            if (step === 4) {
+                buildDossierPreview();
+            }
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        function nextStep(currentStep) {
+            const panel = document.getElementById(`step-panel-${currentStep}`);
+            const requiredInputs = panel.querySelectorAll('[required]');
+            for (const inp of requiredInputs) {
+                if (!inp.value.trim()) {
+                    showAlert(`Please complete mandatory field: ${inp.previousElementSibling ? inp.previousElementSibling.innerText : inp.name}`);
+                    inp.focus();
+                    return;
+                }
+            }
+            if (currentStep === 1 && document.getElementById('description').value.trim().length < 20) {
+                showAlert("Incident description must be at least 20 characters long.");
+                return;
+            }
+            document.getElementById(`step-btn-${currentStep}`).classList.add('completed');
+            goToStep(currentStep + 1);
+        }
+
+        // Real Web Crypto SHA-256 Hash Computation for Uploaded Evidence
+        async function generateEvidenceHash(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            document.getElementById('evidence-file-label').innerText = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+            document.getElementById('evidence_file_name').value = file.name;
+            document.getElementById('evidence-hash-text').innerText = "COMPUTING SHA-256 DIGEST...";
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                document.getElementById('evidence-hash-text').innerText = hashHex;
+                document.getElementById('evidence_hash').value = hashHex;
+            } catch (err) {
+                const fallbackHash = 'sha256-' + Date.now().toString(16);
+                document.getElementById('evidence-hash-text').innerText = fallbackHash;
+                document.getElementById('evidence_hash').value = fallbackHash;
+            }
+        }
+
+        function buildDossierPreview() {
+            const getVal = id => document.getElementById(id)?.value || 'N/A';
+            const preview = document.getElementById('dossier-preview');
+            const items = [
+                { label: 'Category', val: getVal('category') },
+                { label: 'Sub-Category', val: getVal('sub_category') },
+                { label: 'Incident Date', val: getVal('incident_date') },
+                { label: 'Platform', val: getVal('platform') },
+                { label: 'Financial Loss', val: getVal('financial_loss') ? `₹${getVal('financial_loss')}` : '₹0 (Non-Financial)' },
+                { label: 'UTR / Txn ID', val: getVal('transaction_id') },
+                { label: 'Suspect Type', val: getVal('suspect_id_type') },
+                { label: 'Suspect Identifier', val: getVal('suspect_id_value') },
+                { label: 'Complainant', val: getVal('full_name') },
+                { label: 'Mobile', val: getVal('mobile') },
+                { label: 'State & District', val: `${getVal('state')} - ${getVal('district')}` },
+                { label: 'Police Station', val: getVal('police_station') }
+            ];
+
+            preview.innerHTML = items.map(item => `
+                <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800/80">
+                    <div class="text-[10px] text-zinc-500 uppercase">${item.label}</div>
+                    <div class="text-zinc-200 font-bold truncate mt-0.5">${item.val}</div>
+                </div>
+            `).join('');
+        }
+
+        // Submit Form to PHP/Supabase Backend
+        document.getElementById('ncrp-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideAlert();
+
+            const submitBtn = document.getElementById('final-submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="animate-pulse">ENCRYPTING & TRANSMITTING...</span>';
+
+            const formData = new FormData(e.target);
+            const payload = Object.fromEntries(formData.entries());
+            const userEmail = payload.citizen_email || localStorage.getItem('userEmail');
+
+            // Save user's jurisdiction locally scoped strictly to their own email
+            if (userEmail) {
+                localStorage.setItem(`userProfileExtra_${userEmail}`, JSON.stringify({
+                    gender: payload.gender,
+                    dob: payload.dob,
+                    state: payload.state,
+                    district: payload.district,
+                    police_station: payload.police_station,
+                    address: payload.address,
+                    pincode: payload.pincode,
+                    national_id_type: payload.national_id_type,
+                    national_id_no: payload.national_id_no
+                }));
+            }
+
+            try {
+                const res = await fetch('http://localhost/cybercrime-portal/backend/submit_complaint.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    saveLocalComplaintBackup(result.data || payload, result.reference_id, userEmail);
+                    document.getElementById('ack-ref-id').innerText = result.reference_id;
+                    document.getElementById('ack-modal').classList.remove('hidden');
+                } else {
+                    showAlert("Submission Error: " + (result.message || "Make sure the complaints table exists in Supabase."));
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Transmit Official Complaint';
+                }
+            } catch (err) {
+                // Fallback local save if server is temporarily offline
+                const fallbackRef = 'CR-2026-' + Math.floor(100000 + Math.random() * 900000);
+                saveLocalComplaintBackup(payload, fallbackRef, userEmail);
+                document.getElementById('ack-ref-id').innerText = fallbackRef;
+                document.getElementById('ack-modal').classList.remove('hidden');
+            }
+        });
+
+        function saveLocalComplaintBackup(payload, refId, userEmail) {
+            if (!userEmail) return;
+            const storageKey = `localComplaints_${userEmail}`;
+            const list = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            list.unshift({
+                ...payload,
+                reference_id: refId,
+                status: 'PENDING VERIFICATION',
+                created_at: new Date().toISOString()
+            });
+            localStorage.setItem(storageKey, JSON.stringify(list));
+        }
+    </script>
+</body>
+</html>

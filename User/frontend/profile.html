@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber Rakshak - Secure Profile</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-black: #000000;
+            --surface-dark: #09090b;
+            --neon-cyan: #00f0ff;
+            --neon-purple: #8a2be2;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+
+        /* Custom Premium Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+        /* Background Effects */
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+        .glow-cyan { background: var(--neon-cyan); top: -10%; left: -10%; }
+        .glow-purple { background: var(--neon-purple); bottom: -10%; right: -10%; animation-delay: -10s; }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* Glass Cards */
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(9, 9, 11, 0.9), rgba(9, 9, 11, 0.4));
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+        }
+        
+        .history-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        .history-card:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        /* Nav Glass */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+    </style>
+</head>
+<body class="selection:bg-cyan-500/30">
+
+    <!-- Fixed Backgrounds -->
+    <div class="cyber-grid"></div>
+    <div class="ambient-glow glow-cyan"></div>
+    <div class="ambient-glow glow-purple"></div>
+
+    <!-- Minimal Nav Bar -->
+    <nav class="glass-nav fixed w-full top-0 z-50 transition-all duration-300 h-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
+            <a href="home.html" class="flex items-center gap-3 text-zinc-400 hover:text-[#00f0ff] transition-colors font-mono text-sm tracking-widest uppercase">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Terminal
+            </a>
+            
+            <a href="home.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <i data-lucide="shield-check" class="w-6 h-6 text-[#00f0ff]"></i>
+                <span class="font-cyber font-bold text-xl tracking-widest text-white">SECURE<span class="text-[#00f0ff]">NODE</span></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Profile Content -->
+    <main class="pt-32 pb-20 min-h-screen relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Sidebar: Identity & Personal Details -->
+                <div class="lg:col-span-4 space-y-6">
+                    <!-- Identity Card -->
+                    <div class="glass-panel p-8 flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00f0ff] to-[#8a2be2]"></div>
+                        
+                        <div class="relative mb-6 mt-4">
+                            <div class="absolute -inset-3 bg-gradient-to-tr from-[#00f0ff] to-[#8a2be2] rounded-full blur-lg opacity-40 animate-pulse"></div>
+                            <div class="relative w-28 h-28 rounded-full bg-[#050505] border border-[#00f0ff]/50 flex items-center justify-center text-white font-bold font-cyber text-5xl shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+                                <span id="avatar-letter">?</span>
+                            </div>
+                        </div>
+                        
+                        <h2 id="acc-name" class="text-2xl font-bold text-white tracking-wide font-cyber">Loading Identity...</h2>
+                        
+                        <div class="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-[#00f0ff] text-xs font-mono">
+                            <span class="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse"></span>
+                            <span id="acc-role">AUTHENTICATING...</span>
+                        </div>
+                    </div>
+
+                    <!-- Personal Details -->
+                    <div class="glass-panel p-6">
+                        <h3 class="text-xs font-mono text-zinc-500 uppercase tracking-widest border-b border-zinc-900 pb-3 mb-4 flex items-center gap-2">
+                            <i data-lucide="fingerprint" class="w-4 h-4 text-[#00f0ff]"></i> Complete Citizen Dossier
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">Citizen Node UUID</div>
+                                <div id="acc-id" class="text-[#00f0ff] font-mono text-xs truncate">...</div>
+                            </div>
+
+                            <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">Network Email</div>
+                                <div id="acc-email" class="text-zinc-200 font-mono text-sm truncate">...</div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                    <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">Encrypted Mobile</div>
+                                    <div id="acc-mobile" class="text-zinc-200 font-mono text-xs">...</div>
+                                </div>
+                                <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                    <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">Registered On</div>
+                                    <div id="acc-created" class="text-zinc-200 font-mono text-xs">...</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                    <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">Gender / DOB</div>
+                                    <div id="acc-gender-dob" class="text-zinc-400 font-mono text-xs">—</div>
+                                </div>
+                                <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                    <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">National ID</div>
+                                    <div id="acc-national-id" class="text-zinc-400 font-mono text-xs">—</div>
+                                </div>
+                            </div>
+
+                            <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">State / District / Police Station</div>
+                                <div id="acc-jurisdiction" class="text-zinc-400 font-mono text-xs">—</div>
+                            </div>
+
+                            <div class="bg-black/50 p-3.5 rounded-xl border border-zinc-800/50">
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-0.5">Residential Address</div>
+                                <div id="acc-address" class="text-zinc-400 font-mono text-xs">—</div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-6 flex flex-col gap-3">
+                            <a href="report.html" class="w-full py-3 rounded-xl bg-[#00f0ff]/15 text-[#00f0ff] hover:bg-[#00f0ff]/25 border border-[#00f0ff]/40 font-bold text-xs uppercase tracking-wider transition-all flex justify-center items-center gap-2">
+                                <i data-lucide="file-plus-2" class="w-4 h-4"></i> File New Cyber Complaint
+                            </a>
+                            <a href="home.html" class="w-full py-3 rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 border border-zinc-800 font-bold text-xs uppercase tracking-wider transition-all flex justify-center items-center gap-2">
+                                <i data-lucide="home" class="w-4 h-4"></i> Return to Terminal
+                            </a>
+                            <button onclick="logoutUser()" class="w-full py-3 rounded-xl bg-red-600 text-white border border-red-500 hover:bg-red-700 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] font-bold text-xs uppercase tracking-wider transition-all flex justify-center items-center gap-2">
+                                <i data-lucide="log-out" class="w-4 h-4"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Tracking & History -->
+                <div class="lg:col-span-8 space-y-6">
+                    
+                    <!-- Track Complaint Tool -->
+                    <div class="glass-panel p-6 sm:p-8">
+                        <h3 class="text-xl font-cyber font-bold text-white mb-2 flex items-center gap-3">
+                            <i data-lucide="search" class="w-6 h-6 text-[#8a2be2]"></i> Track Active Complaint
+                        </h3>
+                        <p class="text-zinc-400 text-sm mb-6">Enter your NCRP Reference ID to inspect real-time law enforcement status and dossier details.</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="relative flex-1">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                                    <i data-lucide="hash" class="w-5 h-5 text-zinc-500"></i>
+                                </div>
+                                <input type="text" id="track-input" class="w-full bg-black/50 border border-zinc-700/50 text-white rounded-xl focus:border-[#00f0ff] focus:ring-1 focus:ring-[#00f0ff] outline-none block p-4 pl-12 font-mono text-sm transition-all uppercase" placeholder="e.g. CR-2026-849201">
+                            </div>
+                            <button type="button" onclick="trackComplaintById()" class="px-8 py-4 bg-[#8a2be2]/20 text-[#8a2be2] hover:bg-[#8a2be2]/30 border border-[#8a2be2]/50 hover:shadow-[0_0_20px_rgba(138,43,226,0.3)] rounded-xl font-bold text-sm tracking-wider uppercase transition-all whitespace-nowrap">
+                                Scan Uplink
+                            </button>
+                        </div>
+
+                        <!-- Live Track Result Container -->
+                        <div id="track-result-box" class="hidden mt-6 p-6 rounded-2xl bg-black/80 border border-[#00f0ff]/40 space-y-4">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Incident History List -->
+                    <div class="glass-panel p-6 sm:p-8 flex-1">
+                        <div class="flex justify-between items-center mb-6 border-b border-zinc-900 pb-4">
+                            <h3 class="text-xl font-cyber font-bold text-white flex items-center gap-3">
+                                <i data-lucide="activity" class="w-6 h-6 text-[#00f0ff]"></i> Registered Complaint History
+                            </h3>
+                            <div id="complaint-count-badge" class="px-3 py-1 bg-zinc-900 rounded-lg text-xs font-mono text-[#00f0ff] border border-zinc-800">
+                                0 RECORDS
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Data Cards Container -->
+                        <div id="complaints-list-container" class="space-y-4">
+                            <div class="text-center py-8 text-zinc-500 font-mono text-xs">
+                                Fetching complaint records from Supabase node...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Full Complaint Dossier Inspection Modal -->
+    <div id="dossier-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-panel max-w-3xl w-full p-6 sm:p-8 border border-[#00f0ff]/40 my-8">
+            <div class="flex justify-between items-start border-b border-zinc-800 pb-4 mb-6">
+                <div>
+                    <div class="text-[10px] font-mono text-[#00f0ff] uppercase tracking-widest">Official NCRP Case Dossier</div>
+                    <h3 id="modal-ref-id" class="text-2xl font-cyber font-bold text-white mt-0.5">CR-2026-000000</h3>
+                </div>
+                <button onclick="closeDossierModal()" class="p-2 rounded-lg bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="modal-dossier-body" class="space-y-5 text-xs font-mono max-h-[70vh] overflow-y-auto pr-2">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
+
+        let allUserComplaints = [];
+
+        // 2. Auth Guard & Fetch Data on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const userEmail = localStorage.getItem('userEmail');
+            
+            if(!userEmail) {
+                window.location.href = 'login.html';
+            } else {
+                fetchAccountData(userEmail);
+                fetchUserComplaints(userEmail);
+            }
+        });
+
+        // 3. Fetch User Profile Data from PHP/Supabase Backend
+        async function fetchAccountData(email) {
+            const userRole = localStorage.getItem('userRole') || 'citizen';
+            // Scope extra profile data strictly to the logged-in user's email
+            const extra = JSON.parse(localStorage.getItem(`userProfileExtra_${email}`) || '{}');
+            
+            // Reset additional fields to blank by default for each user
+            document.getElementById('acc-gender-dob').innerText = '—';
+            document.getElementById('acc-national-id').innerText = '—';
+            document.getElementById('acc-jurisdiction').innerText = '—';
+            document.getElementById('acc-address').innerText = '—';
+
+            try {
+                const response = await fetch(`http://localhost/cybercrime-portal/backend/get_profile.php?email=${encodeURIComponent(email)}&role=${encodeURIComponent(userRole)}`);
+                const result = await response.json();
+                
+                if(result.success && result.data) {
+                    const data = result.data;
+                    document.getElementById('acc-name').innerText = data.full_name;
+                    document.getElementById('acc-id').innerText = data.id || '—';
+                    document.getElementById('acc-email').innerText = data.email;
+                    document.getElementById('acc-mobile').innerText = data.mobile || '—';
+                    document.getElementById('acc-created').innerText = data.created_at ? new Date(data.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Active';
+                    
+                    const roleText = userRole === 'admin' ? 'OFFICER CLEARANCE' : 'VERIFIED CITIZEN';
+                    document.getElementById('acc-role').innerText = roleText;
+                    document.getElementById('avatar-letter').innerText = data.full_name.charAt(0).toUpperCase();
+
+                    // Populate extra details ONLY if this specific user has provided them in Supabase
+                    const gender = data.gender || extra.gender;
+                    const dob = data.dob || extra.dob;
+                    const natType = data.national_id_type || extra.national_id_type;
+                    const natNo = data.national_id_no || extra.national_id_no;
+                    const state = data.state || extra.state;
+                    const district = data.district || extra.district;
+                    const ps = data.police_station || extra.police_station;
+                    const address = data.address || extra.address;
+                    const pincode = data.pincode || extra.pincode;
+
+                    if (gender || dob) {
+                        document.getElementById('acc-gender-dob').innerText = `${gender || ''}${gender && dob ? ' | ' : ''}${dob || ''}`;
+                    }
+                    if (natNo) {
+                        document.getElementById('acc-national-id').innerText = `${natType ? natType + ': ' : ''}${natNo}`;
+                    }
+                    if (state || district || ps) {
+                        document.getElementById('acc-jurisdiction').innerText = `${state || ''}${district ? ' • ' + district : ''}${ps ? ' (' + ps + ')' : ''}`;
+                    }
+                    if (address) {
+                        document.getElementById('acc-address').innerText = `${address}${pincode ? ' - ' + pincode : ''}`;
+                    }
+                } else {
+                    document.getElementById('acc-name').innerText = localStorage.getItem('userName') || "Verified Citizen";
+                    document.getElementById('acc-email').innerText = email;
+                }
+            } catch(e) {
+                console.error("Backend unreachable", e);
+                const fallbackName = localStorage.getItem('userName') || "Offline Node";
+                document.getElementById('acc-name').innerText = fallbackName;
+                document.getElementById('acc-email').innerText = email;
+                document.getElementById('acc-role').innerText = "LOCAL SESSION";
+                document.getElementById('avatar-letter').innerText = fallbackName.charAt(0).toUpperCase();
+
+                if (extra.gender || extra.dob) {
+                    document.getElementById('acc-gender-dob').innerText = `${extra.gender || ''} | ${extra.dob || ''}`;
+                }
+                if (extra.national_id_no) {
+                    document.getElementById('acc-national-id').innerText = `${extra.national_id_type || 'ID'}: ${extra.national_id_no}`;
+                }
+                if (extra.state) {
+                    document.getElementById('acc-jurisdiction').innerText = `${extra.state} • ${extra.district || ''} (${extra.police_station || ''})`;
+                }
+                if (extra.address) {
+                    document.getElementById('acc-address').innerText = `${extra.address} - ${extra.pincode || ''}`;
+                }
+            }
+        }
+
+        // 4. Fetch User's Submitted Complaints from Supabase
+        async function fetchUserComplaints(email) {
+            const container = document.getElementById('complaints-list-container');
+            let dbComplaints = [];
+
+            try {
+                const res = await fetch(`http://localhost/cybercrime-portal/backend/get_complaints.php?email=${encodeURIComponent(email)}`);
+                const result = await res.json();
+                if (result.success && Array.isArray(result.data)) {
+                    dbComplaints = result.data.filter(c => c.citizen_email === email);
+                }
+            } catch (err) {
+                console.warn("Using local backup complaints:", err);
+            }
+
+            // Merge only with THIS user's local complaints
+            const localBackup = JSON.parse(localStorage.getItem(`localComplaints_${email}`) || '[]');
+            const seenRefs = new Set(dbComplaints.map(c => c.reference_id));
+            const merged = [...dbComplaints];
+            localBackup.forEach(item => {
+                if (item.citizen_email === email && !seenRefs.has(item.reference_id)) {
+                    merged.push(item);
+                }
+            });
+
+            allUserComplaints = merged;
+            document.getElementById('complaint-count-badge').innerText = `${merged.length} RECORD${merged.length === 1 ? '' : 'S'}`;
+
+            // Enrich left profile sidebar ONLY if THIS user has filed at least one complaint
+            if (merged.length > 0) {
+                const latest = merged[0];
+                if (latest.mobile && (document.getElementById('acc-mobile').innerText === '...' || document.getElementById('acc-mobile').innerText === '—')) {
+                    document.getElementById('acc-mobile').innerText = latest.mobile;
+                }
+                if (latest.gender || latest.dob) {
+                    document.getElementById('acc-gender-dob').innerText = `${latest.gender || ''}${latest.gender && latest.dob ? ' | ' : ''}${latest.dob || ''}`;
+                }
+                if (latest.national_id_no) {
+                    document.getElementById('acc-national-id').innerText = `${latest.national_id_type || 'ID'}: ${latest.national_id_no}`;
+                }
+                if (latest.state) {
+                    document.getElementById('acc-jurisdiction').innerText = `${latest.state} • ${latest.district || ''} (${latest.police_station || 'Cyber Cell'})`;
+                }
+                if (latest.address) {
+                    document.getElementById('acc-address').innerText = `${latest.address}${latest.pincode ? ' - ' + latest.pincode : ''}`;
+                }
+            }
+
+            if (merged.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 rounded-2xl bg-black/40 border border-zinc-800/80 text-center space-y-3">
+                        <div class="text-zinc-400 font-mono text-sm">No Cybercrime Complaints Filed Yet</div>
+                        <p class="text-zinc-600 text-xs">Click "File New Cyber Complaint" to report an incident to the NCRP portal.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = merged.map((c, idx) => {
+                const isResolved = (c.status || '').toUpperCase().includes('RESOLVED');
+                const badgeColor = isResolved
+                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                    : 'bg-orange-500/10 text-orange-400 border-orange-500/20';
+                const filedDate = c.created_at ? new Date(c.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Recent';
+
+                return `
+                    <div onclick="openDossierModal(${idx})" class="history-card cursor-pointer p-5 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#00f0ff] shrink-0 font-mono font-bold text-xs">
+                                #${idx + 1}
+                            </div>
+                            <div>
+                                <div class="text-white font-bold font-mono text-sm mb-0.5 flex items-center gap-2">
+                                    ${c.reference_id}
+                                    ${Number(c.financial_loss) > 0 ? `<span class="text-amber-400 text-xs font-mono">(₹${c.financial_loss})</span>` : ''}
+                                </div>
+                                <div class="text-zinc-300 text-xs font-medium">${c.category} — <span class="text-zinc-500">${c.sub_category || c.platform || ''}</span></div>
+                                <div class="text-zinc-500 text-[10px] mt-1 uppercase tracking-widest">
+                                    Filed: ${filedDate} • PS: ${c.police_station || 'State Cyber Cell'}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="px-3 py-1.5 rounded-full border ${badgeColor} text-xs font-mono text-center">
+                                ${c.status || 'PENDING VERIFICATION'}
+                            </div>
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-zinc-500"></i>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // 5. Track Active Complaint by Reference ID
+        async function trackComplaintById() {
+            const refInput = document.getElementById('track-input').value.trim().toUpperCase();
+            const box = document.getElementById('track-result-box');
+
+            if (!refInput) return;
+
+            box.classList.remove('hidden');
+            box.innerHTML = `<div class="text-zinc-400 font-mono text-xs animate-pulse">Scanning NCRP Uplink for ${refInput}...</div>`;
+
+            let found = allUserComplaints.find(c => (c.reference_id || '').toUpperCase() === refInput);
+
+            if (!found) {
+                try {
+                    const res = await fetch(`http://localhost/cybercrime-portal/backend/get_complaints.php?ref=${encodeURIComponent(refInput)}`);
+                    const result = await res.json();
+                    if (result.success && result.data && result.data.length > 0) {
+                        found = result.data[0];
+                    }
+                } catch (e) {
+                    console.warn("Track lookup offline", e);
+                }
+            }
+
+            if (!found) {
+                box.innerHTML = `
+                    <div class="text-red-400 font-mono text-xs flex items-center gap-2">
+                        <span>No complaint found matching Reference ID: <strong>${refInput}</strong></span>
+                    </div>
+                `;
+                return;
+            }
+
+            box.innerHTML = renderDossierHTML(found);
+        }
+
+        function openDossierModal(index) {
+            const c = allUserComplaints[index];
+            if (!c) return;
+            document.getElementById('modal-ref-id').innerText = c.reference_id;
+            document.getElementById('modal-dossier-body').innerHTML = renderDossierHTML(c);
+            document.getElementById('dossier-modal').classList.remove('hidden');
+        }
+
+        function closeDossierModal() {
+            document.getElementById('dossier-modal').classList.add('hidden');
+        }
+
+        function renderDossierHTML(c) {
+            return `
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[10px] text-zinc-500 uppercase">Current Triage Status</div>
+                        <div class="text-[#00f0ff] font-bold mt-0.5">${c.status || 'PENDING VERIFICATION'}</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[10px] text-zinc-500 uppercase">Category & Sub-Category</div>
+                        <div class="text-white font-bold mt-0.5">${c.category} / ${c.sub_category || 'N/A'}</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[10px] text-zinc-500 uppercase">Incident Date & Platform</div>
+                        <div class="text-white font-bold mt-0.5">${c.incident_date || 'N/A'} (${c.platform || 'N/A'})</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[10px] text-zinc-500 uppercase">Financial Loss & Bank</div>
+                        <div class="text-amber-400 font-bold mt-0.5">₹${c.financial_loss || 0} • ${c.bank_name || 'N/A'} (UTR: ${c.transaction_id || 'N/A'})</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[10px] text-zinc-500 uppercase">Suspect Identifier</div>
+                        <div class="text-purple-300 font-bold mt-0.5">${c.suspect_id_type || 'Unknown'}: ${c.suspect_id_value || 'N/A'}</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800">
+                        <div class="text-[10px] text-zinc-500 uppercase">Assigned Jurisdiction</div>
+                        <div class="text-emerald-400 font-bold mt-0.5">${c.state || ''} - ${c.district || ''} (${c.police_station || ''})</div>
+                    </div>
+                </div>
+                <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+                    <div class="text-[10px] text-zinc-500 uppercase mb-1">Incident Statement</div>
+                    <div class="text-zinc-300 leading-relaxed">${c.description || 'No description provided.'}</div>
+                </div>
+                <div class="p-3 rounded-xl bg-zinc-950 border border-zinc-800 flex flex-col sm:flex-row justify-between gap-2">
+                    <span class="text-zinc-500">EVIDENCE FILE: <strong class="text-zinc-300">${c.evidence_file_name || 'None'}</strong></span>
+                    <span class="text-[#00f0ff] truncate">SHA-256: ${c.evidence_hash || 'N/A'}</span>
+                </div>
+            `;
+        }
+
+        // 6. Secure Logout Function
+        function logoutUser() {
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userRole');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
