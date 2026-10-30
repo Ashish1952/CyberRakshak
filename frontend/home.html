@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber Rakshak - Secure National Portal</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Google Translate Script (Standard Dropdown for 100% Reliability) -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,gu,mr,ta,te,kn,ml,bn,pa,ur,or,as',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        :root {
+            --bg-black: #000000;
+            --surface-dark: #09090b;
+            --neon-cyan: #00f0ff;
+            --neon-purple: #8a2be2;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-cyber { font-family: 'Orbitron', sans-serif; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+
+        /* Custom Premium Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-black); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+        /* Background Effects */
+        .cyber-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
+        }
+
+        .ambient-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+        .glow-cyan { background: var(--neon-cyan); top: -10%; left: -10%; }
+        .glow-purple { background: var(--neon-purple); bottom: -10%; right: -10%; animation-delay: -10s; }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* Glass & Cards */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .premium-card {
+            background: linear-gradient(145deg, rgba(9, 9, 11, 0.9), rgba(9, 9, 11, 0.4));
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.5), transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .premium-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 20px 40px -10px rgba(0, 240, 255, 0.1);
+        }
+        .premium-card:hover::before { opacity: 1; }
+
+        /* Buttons */
+        .btn-neon {
+            position: relative;
+            background: transparent;
+            color: #fff;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-neon::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+            transition: all 0.5s ease;
+        }
+        .btn-neon:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            transform: scale(1.02);
+        }
+        .btn-neon:hover::before { left: 100%; }
+
+        /* Side Drawer (Profile) */
+        .drawer-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            opacity: 0; visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        
+        .profile-drawer {
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #050505;
+            border-left: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.5);
+        }
+        .profile-drawer.active { transform: translateX(0); }
+
+        /* Google Translate Styling overrides for Black Theme */
+        #google_translate_element {
+            display: inline-block;
+        }
+        .goog-te-gadget {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 0px !important;
+            color: transparent !important;
+            margin: 0 !important;
+        }
+        .goog-te-gadget .goog-te-combo {
+            background-color: #09090b !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(0, 240, 255, 0.35) !important;
+            border-radius: 8px !important;
+            padding: 6px 12px !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            outline: none !important;
+            margin: 0 !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+        }
+        .goog-te-gadget .goog-te-combo:hover,
+        .goog-te-gadget .goog-te-combo:focus {
+            border-color: var(--neon-cyan) !important;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.25) !important;
+        }
+        .goog-te-gadget .goog-te-combo option {
+            background-color: #09090b !important;
+            color: #ffffff !important;
+        }
+        
+        /* Hide Google Branding & Top Banner without hiding the select dropdown */
+        .goog-logo-link, .goog-te-gadget img { display: none !important; }
+        body { top: 0 !important; } 
+        .skiptranslate iframe, .goog-te-banner-frame { display: none !important; } 
+        #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+
+        /* Scroll Reveal */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="selection:bg-cyan-500/30">
+
+    <!-- Fixed Backgrounds -->
+    <div class="cyber-grid"></div>
+    <div class="ambient-glow glow-cyan"></div>
+    <div class="ambient-glow glow-purple"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav fixed w-full top-0 z-50 transition-all duration-300 h-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
+            
+            <!-- Logo -->
+            <a href="home.html" class="flex items-center gap-3 group">
+                <div class="p-1.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 group-hover:border-cyan-400 transition-colors shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <img src="src/logo.png" alt="Cyber Rakshak Logo" class="w-8 h-8 object-contain rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <i data-lucide="shield-alert" class="w-6 h-6 text-[#00f0ff] hidden"></i>
+                </div>
+                <div>
+                    <span class="font-cyber font-bold text-xl tracking-widest text-white">CYBER<span class="text-[#00f0ff]">RAKSHAK</span></span>
+                    <div class="text-[9px] font-mono text-zinc-500 tracking-widest uppercase">Encrypted Network</div>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#hero" class="text-zinc-400 hover:text-white text-sm font-medium transition-colors">Home</a>
+                <a href="#scam-alerts" class="text-red-400 hover:text-red-300 text-sm font-medium transition-colors flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span> Scam Alerts
+                </a>
+                <a href="#features" class="text-zinc-400 hover:text-white text-sm font-medium transition-colors">Systems</a>
+                
+                <!-- Translation Node -->
+                <div class="flex items-center gap-2 pl-4 border-l border-zinc-800">
+                    <i data-lucide="globe-2" class="w-4 h-4 text-zinc-400"></i>
+                    <div id="google_translate_element"></div>
+                </div>
+
+                <!-- Account Avatar (Redirects to Profile) -->
+                <a href="profile.html" id="desktop-profile-btn" class="relative group ml-4 block cursor-pointer">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full blur opacity-40 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative w-10 h-10 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center text-white font-bold font-cyber text-lg group-hover:border-cyan-400 transition-colors">
+                        <span id="desktop-avatar-letter">?</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <div class="lg:hidden flex items-center gap-4">
+                <div id="google_translate_element_mobile" class="scale-90 transform origin-right"></div>
+                <button id="mobile-menu-btn" class="text-zinc-400 hover:text-white">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-xl pt-24 px-6 flex flex-col gap-6">
+        <a href="#hero" class="text-2xl font-cyber text-white hover:text-[#00f0ff] transition-colors border-b border-zinc-900 pb-4">Terminal</a>
+        <a href="#scam-alerts" class="text-2xl font-cyber text-red-400 hover:text-red-300 transition-colors border-b border-zinc-900 pb-4 flex items-center gap-3">
+            <i data-lucide="siren" class="w-6 h-6"></i> Scam Alerts
+        </a>
+        <a href="#features" class="text-2xl font-cyber text-white hover:text-[#00f0ff] transition-colors border-b border-zinc-900 pb-4">Systems</a>
+        <a href="profile.html" class="w-full py-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-[#00f0ff] font-bold text-lg flex items-center justify-center gap-3 transition-colors hover:bg-cyan-500/20">
+            <i data-lucide="user" class="w-5 h-5"></i> Access Node
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <main id="hero" class="pt-32 pb-20 lg:pt-48 lg:pb-32 min-h-screen flex items-center relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+                
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2 reveal active">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-mono font-medium mb-8 shadow-[0_0_15px_rgba(138,43,226,0.15)]">
+                        <i data-lucide="lock" class="w-3.5 h-3.5"></i> End-to-End Encrypted Triage
+                    </div>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight mb-6 leading-[1.1] font-cyber">
+                        DEFEND YOUR <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#8a2be2]">DIGITAL SPACE</span>
+                    </h1>
+                    <p class="text-lg text-zinc-400 mb-10 max-w-xl leading-relaxed">
+                        The ultimate cyber-defense framework. Report threats, track investigations, and secure your digital footprint with our AI-driven law enforcement node.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-5">
+                        <a href="report.html" class="btn-neon px-8 py-4 font-bold text-sm flex justify-center items-center gap-2 bg-[#00f0ff]/10 text-center cursor-pointer">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i> REPORT COMPLAINT
+                        </a>
+                        <a href="profile.html" class="px-8 py-4 font-bold text-sm flex justify-center items-center gap-2 bg-transparent text-white border border-zinc-700 hover:border-zinc-500 rounded-xl transition-all hover:bg-zinc-900 text-center cursor-pointer">
+                            <i data-lucide="search" class="w-5 h-5 text-zinc-400"></i> TRACK COMPLAINT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Premium Hero Graphic -->
+                <div class="w-full lg:w-1/2 relative hidden md:flex justify-center items-center reveal active">
+                    <!-- Glowing Backdrops -->
+                    <div class="absolute w-72 h-72 bg-[#00f0ff] rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"></div>
+                    <div class="absolute w-72 h-72 bg-[#8a2be2] rounded-full mix-blend-screen filter blur-[100px] opacity-20 translate-x-20 translate-y-20"></div>
+                    
+                    <!-- Advanced SVG Core -->
+                    <div class="relative w-full max-w-md aspect-square animate-[float_6s_ease-in-out_infinite]">
+                        <svg viewBox="0 0 400 400" class="w-full h-full drop-shadow-[0_0_30px_rgba(0,240,255,0.3)]">
+                            <!-- Outer rotating dashed ring -->
+                            <circle cx="200" cy="200" r="180" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none" stroke-dasharray="10 15">
+                                <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="20s" repeatCount="indefinite"/>
+                            </circle>
+                            <!-- Inner glowing ring -->
+                            <circle cx="200" cy="200" r="140" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1" fill="none"/>
+                            
+                            <!-- Shield Geometry -->
+                            <path d="M200 70 L290 110 V190 C290 260 250 310 200 340 C150 310 110 260 110 190 V110 L200 70 Z" 
+                                  fill="rgba(9, 9, 11, 0.9)" stroke="#8a2be2" stroke-width="3"/>
+                            
+                            <!-- Center Eye/Core -->
+                            <circle cx="200" cy="190" r="30" fill="none" stroke="#00f0ff" stroke-width="4"/>
+                            <circle cx="200" cy="190" r="10" fill="#00f0ff" class="animate-pulse"/>
+                            
+                            <!-- Circuit Lines -->
+                            <path d="M110 190 H170 M230 190 H290 M200 70 V160 M200 220 V340" stroke="rgba(0, 240, 255, 0.3)" stroke-width="2"/>
+                        </svg>
+
+                        <!-- Floating Glass Data Panels -->
+                        <div class="absolute top-12 -left-8 premium-card px-4 py-3 flex items-center gap-3 backdrop-blur-xl border border-[#00f0ff]/30">
+                            <div class="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse"></div>
+                            <div>
+                                <div class="text-white text-xs font-bold font-mono">UPLINK SECURE</div>
+                                <div class="text-zinc-500 text-[10px] font-mono">LATENCY: 8ms</div>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-24 -right-12 premium-card px-4 py-3 flex items-center gap-3 backdrop-blur-xl border border-[#8a2be2]/30">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-[#8a2be2]"></i>
+                            <div>
+                                <div class="text-white text-xs font-bold font-mono">ENCRYPTION</div>
+                                <div class="text-zinc-500 text-[10px] font-mono">AES-256 GCM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==========================================
+         LIVE SCAM ALERTS & PUBLIC ADVISORIES SECTION
+         ========================================== -->
+    <section id="scam-alerts" class="py-24 relative z-10 border-t border-zinc-900 bg-gradient-to-b from-black via-[#07050a] to-[#050505]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Emergency Threat Broadcast Ticker -->
+            <div class="mb-12 p-3.5 rounded-2xl bg-red-950/30 border border-red-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 reveal">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-lg bg-red-500 text-black font-cyber font-black text-[10px] tracking-widest uppercase flex items-center gap-1.5 shrink-0">
+                        <i data-lucide="radio" class="w-3.5 h-3.5 animate-pulse"></i> I4C / MHA BULLETIN
+                    </span>
+                    <p class="text-xs sm:text-sm text-red-200 font-mono">
+                        <strong>CRITICAL WARNING:</strong> CBI, Police, Customs, or Judges <span class="underline decoration-red-400">NEVER</span> conduct "Digital Arrests" or interrogations over WhatsApp/Skype video calls.
+                    </p>
+                </div>
+                <a href="report.html" class="px-4 py-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 text-red-300 font-mono text-xs whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0">
+                    Report Scam <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+
+            <!-- Section Header & Filter Pills -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-6 reveal">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono mb-4">
+                        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span> NATIONAL THREAT INTELLIGENCE FEED
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-black text-white font-cyber tracking-wide uppercase">
+                        Active <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-400 to-[#00f0ff]">Scam Alerts</span>
+                    </h2>
+                    <p class="text-zinc-400 text-sm sm:text-base mt-2 max-w-2xl">
+                        Stay ahead of cybercriminals. Click on any active threat advisory below to inspect the scammer's Modus Operandi, warning signs, and official safety protocols.
+                    </p>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="filterScamAlerts('all')" class="scam-filter-btn active px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider border border-[#00f0ff] bg-[#00f0ff]/15 text-white transition-all" data-filter="all">All Threats</button>
+                    <button type="button" onclick="filterScamAlerts('financial')" class="scam-filter-btn px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider border border-zinc-800 bg-zinc-900/70 text-zinc-400 hover:text-white transition-all" data-filter="financial">Financial / UPI</button>
+                    <button type="button" onclick="filterScamAlerts('impersonation')" class="scam-filter-btn px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider border border-zinc-800 bg-zinc-900/70 text-zinc-400 hover:text-white transition-all" data-filter="impersonation">Digital Arrest</button>
+                    <button type="button" onclick="filterScamAlerts('social')" class="scam-filter-btn px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider border border-zinc-800 bg-zinc-900/70 text-zinc-400 hover:text-white transition-all" data-filter="social">Jobs & Social</button>
+                </div>
+            </div>
+
+            <!-- Scam Alerts Grid -->
+            <div id="scam-alerts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Golden Hour 1930 Emergency Callout -->
+            <div class="mt-12 premium-card p-6 sm:p-8 border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-zinc-950 to-cyan-500/10 flex flex-col lg:flex-row items-center justify-between gap-6 reveal">
+                <div class="flex items-start sm:items-center gap-5">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0 shadow-[0_0_25px_rgba(245,158,11,0.2)]">
+                        <i data-lucide="phone-Call" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-mono text-amber-400 uppercase tracking-widest mb-1">Golden Hour Financial Recovery Protocol</div>
+                        <h3 class="text-xl sm:text-2xl font-cyber font-bold text-white">Lost Money to a Cyber Scam? Dial <span class="text-[#00f0ff]">1930</span> Immediately!</h3>
+                        <p class="text-zinc-400 text-xs sm:text-sm mt-1">
+                            Reporting within the first 2 hours ("Golden Hour") allows the National Cybercrime Portal to freeze the fraudster's bank account before funds are withdrawn.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex sm:flex-row flex-col gap-3 w-full lg:w-auto shrink-0">
+                    <a href="report.html" class="px-6 py-3.5 rounded-xl bg-[#00f0ff] text-black font-cyber font-bold text-xs uppercase tracking-wider text-center hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] transition-all">
+                        File Online Complaint
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Scam Alert Detailed Advisory Modal -->
+    <div id="scam-detail-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+        <div class="premium-card max-w-2xl w-full p-6 sm:p-8 border border-[#00f0ff]/40 my-8 bg-[#070709]">
+            <div class="flex justify-between items-start gap-4 border-b border-zinc-800 pb-4 mb-6">
+                <div>
+                    <span id="scam-modal-severity" class="inline-block px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest mb-2 bg-red-500/20 text-red-400 border border-red-500/30">CRITICAL SEVERITY</span>
+                    <h3 id="scam-modal-title" class="text-2xl font-cyber font-bold text-white">Scam Alert Title</h3>
+                </div>
+                <button type="button" onclick="closeScamModal()" class="p-2 rounded-xl bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-5 text-sm">
+                <div class="p-4 rounded-2xl bg-black/70 border border-zinc-800">
+                    <div class="text-xs font-mono text-[#00f0ff] uppercase tracking-wider mb-1.5 flex items-center gap-2">
+                        <i data-lucide="eye" class="w-4 h-4"></i> How This Scam Works (Modus Operandi)
+                    </div>
+                    <p id="scam-modal-desc" class="text-zinc-300 leading-relaxed text-xs sm:text-sm"></p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-2xl bg-red-950/20 border border-red-500/30">
+                        <div class="text-xs font-mono text-red-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-4 h-4"></i> Red Flags to Watch
+                        </div>
+                        <ul id="scam-modal-flags" class="space-y-2 text-xs text-zinc-300 list-disc list-inside"></ul>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/30">
+                        <div class="text-xs font-mono text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i> Official Safety Protocol
+                        </div>
+                        <ul id="scam-modal-safety" class="space-y-2 text-xs text-zinc-300 list-disc list-inside"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <span class="text-[11px] font-mono text-zinc-500">Issued by Cyber Rakshak Threat Intelligence</span>
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <button type="button" onclick="closeScamModal()" class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-mono uppercase">Close</button>
+                    <a href="report.html" class="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl bg-[#00f0ff] text-black font-cyber font-bold text-xs uppercase text-center">Report This Scam</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bento Box Features Section -->
+    <section id="features" class="py-24 relative z-10 border-t border-zinc-900 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+                <h2 class="text-4xl font-black text-white font-cyber tracking-wide mb-6 uppercase">System <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#8a2be2]">Architecture</span></h2>
+                <p class="text-zinc-400 text-lg">Next-generation modules engineered for absolute digital security and rapid incident response.</p>
+            </div>
+
+            <!-- CSS Grid Bento Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
+                
+                <!-- Feature 1: Large Span -->
+                <div class="premium-card md:col-span-2 p-8 flex flex-col justify-end reveal group">
+                    <div class="absolute top-8 right-8 w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-[#00f0ff] group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(0,240,255,0.1)]">
+                        <i data-lucide="cpu" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 font-cyber">AI Threat Triage</h3>
+                    <p class="text-zinc-400 text-sm max-w-md">Our Gemini-powered intelligence engine automatically categorizes incidents, extracts actionable indicators of compromise (IOCs), and prioritizes dispatch.</p>
+                </div>
+
+                <!-- Feature 2: Small Square -->
+                <div class="premium-card p-8 flex flex-col justify-end reveal group transition-delay-100">
+                    <div class="absolute top-8 right-8 w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-[#8a2be2] group-hover:scale-110 transition-transform">
+                        <i data-lucide="fingerprint" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 font-cyber">Immutable Logs</h3>
+                    <p class="text-zinc-500 text-xs">Cryptographic hashing of all uploaded evidence ensures courtroom validity.</p>
+                </div>
+
+                <!-- Feature 3: Small Square -->
+                <div class="premium-card p-8 flex flex-col justify-end reveal group transition-delay-200">
+                    <div class="absolute top-8 right-8 w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                        <i data-lucide="radar" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 font-cyber">Active Sonar</h3>
+                    <p class="text-zinc-500 text-xs">Real-time geospatial mapping of incoming threat vectors for law enforcement.</p>
+                </div>
+
+                <!-- Feature 4: Large Span -->
+                <div class="premium-card md:col-span-2 p-8 flex flex-col justify-end reveal group transition-delay-300">
+                    <div class="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:rotate-12 transition-transform">
+                            <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 font-cyber">Rapid Response Protocol</h3>
+                        <p class="text-zinc-400 text-sm max-w-md">Seamless integration between citizen reporting terminals and law enforcement dashboards reduces action time from days to minutes.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Footer -->
+    <footer id="footer" class="border-t border-zinc-900 bg-[#000000] pt-20 pb-10 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                
+                <!-- Brand Col -->
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="src/logo.png" alt="Cyber Rakshak Logo" class="w-8 h-8 object-contain rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <i data-lucide="shield-alert" class="w-7 h-7 text-[#00f0ff] hidden"></i>
+                        <span class="font-cyber font-bold text-2xl text-white tracking-widest">CYBER<span class="text-[#00f0ff]">RAKSHAK</span></span>
+                    </div>
+                    <p class="text-zinc-500 text-sm leading-relaxed mb-6">
+                        An advanced, encrypted terminal for reporting and mitigating digital threats. Securing the nation's cyber infrastructure line by line.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-[#00f0ff] hover:border-[#00f0ff]/50 transition-all"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-[#00f0ff] hover:border-[#00f0ff]/50 transition-all"><i data-lucide="github" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links Col -->
+                <div class="md:col-span-2 md:col-start-7">
+                    <h4 class="text-white font-mono font-bold mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="text-zinc-500 hover:text-[#00f0ff] text-sm transition-colors">Terminal Node</a></li>
+                        <li><a href="#scam-alerts" class="text-zinc-500 hover:text-red-400 text-sm transition-colors">Scam Alerts</a></li>
+                        <li><a href="#features" class="text-zinc-500 hover:text-[#00f0ff] text-sm transition-colors">System Architecture</a></li>
+                        <li><a href="profile.html" class="text-zinc-500 hover:text-[#00f0ff] text-sm transition-colors">Access Account</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Col -->
+                <div class="md:col-span-4">
+                    <h4 class="text-white font-mono font-bold mb-6 uppercase tracking-widest text-xs">Emergency Uplink</h4>
+                    <div class="premium-card p-5 bg-zinc-900/30">
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-4 text-zinc-400 text-sm">
+                                <div class="p-2 bg-red-500/10 rounded-lg text-red-400"><i data-lucide="phone" class="w-4 h-4"></i></div>
+                                <div>
+                                    <div class="text-[10px] uppercase tracking-widest text-zinc-600 mb-0.5">National Hotline</div>
+                                    <div class="font-mono text-white">1930</div>
+                                </div>
+                            </li>
+                            <li class="flex items-center gap-4 text-zinc-400 text-sm">
+                                <div class="p-2 bg-cyan-500/10 rounded-lg text-[#00f0ff]"><i data-lucide="mail" class="w-4 h-4"></i></div>
+                                <div>
+                                    <div class="text-[10px] uppercase tracking-widest text-zinc-600 mb-0.5">Support Node</div>
+                                    <div class="font-mono text-white">soc@cyberrakshak.in</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-zinc-600 text-xs font-mono">
+                    &copy; 2026 CYBER RAKSHAK NODE. ALL SYSTEMS OPERATIONAL.
+                </p>
+                <div class="flex gap-6 text-xs text-zinc-600">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Scripts -->
+    <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
+
+        // 2. Navbar Scroll Effect (Glassmorphism)
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-lg', 'shadow-[#00f0ff]/5');
+                nav.style.background = 'rgba(0, 0, 0, 0.8)';
+            } else {
+                nav.classList.remove('shadow-lg', 'shadow-[#00f0ff]/5');
+                nav.style.background = 'transparent';
+            }
+        });
+
+        // 3. Scroll Reveal Animations (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // 4. Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if(menuOpen) {
+                mobileMenu.classList.remove('hidden');
+                mobileBtn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileBtn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+            }
+            lucide.createIcons();
+        });
+
+        // 5. Scam Alerts Database & Interactive Filtering
+        const SCAM_ALERTS_DATA = [
+            {
+                id: 1,
+                category: 'impersonation',
+                severity: 'CRITICAL ALERT',
+                severityColor: 'bg-red-500/15 text-red-400 border-red-500/30',
+                icon: 'video-off',
+                iconColor: 'text-red-400 bg-red-500/10 border-red-500/20',
+                title: '"Digital Arrest" & Fake CBI / Customs Calls',
+                shortDesc: 'Scammers pose as Police, CBI, Narcotics, or FedEx officials claiming an illegal parcel is in your name and force you onto a Skype/WhatsApp video call.',
+                modusOperandi: 'Fraudsters call victims claiming a parcel containing drugs, fake passports, or laundered money was seized in their name. They wear fake police uniforms in a studio setup and force the victim to stay on a continuous WhatsApp or Skype video call ("Digital Arrest") while demanding lakhs of rupees to "verify" or clear their name.',
+                redFlags: [
+                    'Caller demands you stay on a video call and not speak to family.',
+                    'Shares fake arrest warrants or Supreme Court/RBI letters on WhatsApp.',
+                    'Asks you to transfer money to a "Reserve Bank Verification Account".'
+                ],
+                safetyTips: [
+                    'Indian Law Enforcement NEVER conducts "Digital Arrests" on video calls.',
+                    'Hang up immediately and do not transfer any funds.',
+                    'Report the phone number on report.html or dial 1930.'
+                ]
+            },
+            {
+                id: 2,
+                category: 'financial',
+                severity: 'HIGH SEVERITY',
+                severityColor: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+                icon: 'qr-code',
+                iconColor: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+                title: 'UPI Collect Request & QR Code Scam',
+                shortDesc: 'Fraudsters send a QR code or "Collect Request" on GPay/PhonePe claiming you will receive money by entering your UPI PIN.',
+                modusOperandi: 'Scammers contact sellers on OLX/Marketplace or pretend to send a cashback/refund. They share a QR code or trigger a payment collect notification and tell you to scan and enter your 4 or 6-digit UPI PIN to "receive" the amount—which immediately debits your bank account.',
+                redFlags: [
+                    'Someone asks you to scan a QR code to RECEIVE money.',
+                    'Fake SMS showing "Rs. 5,000 credited" followed by a call asking for a "refund" of extra money sent by mistake.',
+                    'Screen-sharing requests via AnyDesk or TeamViewer.'
+                ],
+                safetyTips: [
+                    'Remember: UPI PIN is ONLY required to SEND money, NEVER to receive money.',
+                    'Always verify actual bank balance inside your banking app, not just SMS.',
+                    'Never share OTPs or UPI PINs with anyone.'
+                ]
+            },
+            {
+                id: 3,
+                category: 'social',
+                severity: 'HIGH SEVERITY',
+                severityColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
+                icon: 'briefcase',
+                iconColor: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+                title: 'Telegram Part-Time Job & Task Fraud',
+                shortDesc: 'Offers of ₹3,000–₹10,000/day for liking YouTube videos, rating Google Maps hotels, or investing in "Prepaid Tasks".',
+                modusOperandi: 'Victims receive a WhatsApp message offering easy work-from-home income by liking YouTube videos or rating hotels. Initially, scammers pay ₹150–₹500 to build trust. Later, they move the victim to a Telegram group and demand "Prepaid VIP Tasks" of ₹10,000 to ₹5,00,000, freezing the fake dashboard wallet until more money is paid.',
+                redFlags: [
+                    'Unsolicited job offers on WhatsApp/Telegram promising high daily payouts.',
+                    'Requirement to deposit money ("Prepaid Task") to unlock your earnings.',
+                    'Fake trading websites or crypto task dashboards.'
+                ],
+                safetyTips: [
+                    'Legitimate companies never ask employees to pay money to complete tasks.',
+                    'Stop transacting immediately even if they paid you ₹200 initially.',
+                    'Save screenshots of the Telegram handle and UPI IDs used.'
+                ]
+            },
+            {
+                id: 4,
+                category: 'financial',
+                severity: 'CRITICAL ALERT',
+                severityColor: 'bg-red-500/15 text-red-400 border-red-500/30',
+                icon: 'file-warning',
+                iconColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+                title: 'Malicious APK Files (Fake Bank KYC / Challan / Wedding Invite)',
+                shortDesc: 'WhatsApp messages containing ".apk" files disguised as RTO Traffic Challans, Electricity Bill warnings, PM Kisan, or Wedding Cards.',
+                modusOperandi: 'Scammers send an Android application file (.apk) via WhatsApp claiming your bank account or electricity will be disconnected tonight, or send a file named "Wedding_Invitation.apk" / "RTO_Challan.apk". Once installed, it steals SMS OTPs and remotely drains bank accounts.',
+                redFlags: [
+                    'Files ending in ".apk" sent over WhatsApp or SMS.',
+                    'Urgent threats of power cut or PAN/Bank account freeze tonight.',
+                    'Requests to enable "Install from Unknown Sources" or SMS permissions.'
+                ],
+                safetyTips: [
+                    'Never download or install any .apk file received via WhatsApp or SMS.',
+                    'Check traffic challans only on the official parivahan.gov.in website.',
+                    'If installed accidentally, turn ON Airplane Mode immediately and uninstall the app.'
+                ]
+            },
+            {
+                id: 5,
+                category: 'social',
+                severity: 'HIGH SEVERITY',
+                severityColor: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+                icon: 'trending-up',
+                iconColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+                title: 'Fake Stock Market IPO & WhatsApp VIP Trading Groups',
+                shortDesc: 'Fake WhatsApp groups impersonating SEBI-registered brokers offering 300% guaranteed returns on Institutional/IPO allotments.',
+                modusOperandi: 'Scammers run Facebook/Instagram ads featuring deepfakes of famous finance experts. Victims are added to WhatsApp groups full of fake members posting profit screenshots. Victims are asked to install a fake trading app that shows fabricated profits, but blocks all withdrawals.',
+                redFlags: [
+                    'Promises of 15%–50% weekly returns or discounted "Institutional Block Trades".',
+                    'Trading apps downloaded via web links instead of official Play Store/App Store.',
+                    'Requests to transfer investment money to different random current accounts.'
+                ],
+                safetyTips: [
+                    'Verify broker registration on the official SEBI portal before investing.',
+                    'Never transfer investment funds to third-party personal or corporate bank accounts.',
+                    'Report fake investment groups immediately.'
+                ]
+            },
+            {
+                id: 6,
+                category: 'impersonation',
+                severity: 'ELEVATED ALERT',
+                severityColor: 'bg-cyan-500/15 text-[#00f0ff] border-cyan-500/30',
+                icon: 'mic',
+                iconColor: 'text-[#00f0ff] bg-cyan-500/10 border-cyan-500/20',
+                title: 'AI Voice Cloning & Video Call Sextortion / Blackmail',
+                shortDesc: 'AI-cloned voices of family members in fake medical/police emergencies, or unknown WhatsApp video calls recording morphed clips.',
+                modusOperandi: 'Criminals use AI tools to clone a relative\'s voice and call parents claiming their child has been in an accident or arrested, demanding urgent UPI transfers. Alternatively, scammers initiate a sudden WhatsApp video call, record the victim\'s face for 5 seconds, morph it onto explicit footage, and blackmail them.',
+                redFlags: [
+                    'Panic-inducing calls from unknown numbers claiming a relative is in trouble.',
+                    'Sudden video calls from unknown numbers on WhatsApp or Instagram.',
+                    'Threats to upload morphed videos to your contacts unless you pay.'
+                ],
+                safetyTips: [
+                    'Always hang up and call your family member directly on their real number to verify.',
+                    'Cover your front camera when answering unexpected video calls from strangers.',
+                    'Never pay blackmailers—file a confidential report on Cyber Rakshak immediately.'
+                ]
+            }
+        ];
+
+        function renderScamAlerts(filter = 'all') {
+            const grid = document.getElementById('scam-alerts-grid');
+            if (!grid) return;
+
+            const filtered = filter === 'all'
+                ? SCAM_ALERTS_DATA
+                : SCAM_ALERTS_DATA.filter(item => item.category === filter);
+
+            grid.innerHTML = filtered.map(scam => `
+                <div onclick="openScamModal(${scam.id})" class="premium-card p-6 flex flex-col justify-between cursor-pointer group hover:border-red-500/40">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-5">
+                            <div class="w-12 h-12 rounded-2xl border ${scam.iconColor} flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i data-lucide="${scam.icon}" class="w-6 h-6"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider border ${scam.severityColor}">
+                                ${scam.severity}
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white font-cyber mb-2.5 group-hover:text-[#00f0ff] transition-colors">
+                            ${scam.title}
+                        </h3>
+                        <p class="text-zinc-400 text-xs leading-relaxed mb-6">
+                            ${scam.shortDesc}
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-[#00f0ff]">
+                        <span>Inspect Safety Protocol</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function filterScamAlerts(category) {
+            document.querySelectorAll('.scam-filter-btn').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.className = 'scam-filter-btn active px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider border border-[#00f0ff] bg-[#00f0ff]/15 text-white transition-all';
+                } else {
+                    btn.className = 'scam-filter-btn px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider border border-zinc-800 bg-zinc-900/70 text-zinc-400 hover:text-white transition-all';
+                }
+            });
+            renderScamAlerts(category);
+        }
+
+        function openScamModal(id) {
+            const scam = SCAM_ALERTS_DATA.find(s => s.id === id);
+            if (!scam) return;
+
+            document.getElementById('scam-modal-severity').innerText = scam.severity;
+            document.getElementById('scam-modal-title').innerText = scam.title;
+            document.getElementById('scam-modal-desc').innerText = scam.modusOperandi;
+
+            document.getElementById('scam-modal-flags').innerHTML = scam.redFlags
+                .map(flag => `<li>${flag}</li>`).join('');
+            document.getElementById('scam-modal-safety').innerHTML = scam.safetyTips
+                .map(tip => `<li>${tip}</li>`).join('');
+
+            document.getElementById('scam-detail-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeScamModal() {
+            document.getElementById('scam-detail-modal').classList.add('hidden');
+        }
+
+        // Initialize Scam Alerts on Load
+        renderScamAlerts('all');
+
+        // Relocate Google Translate on Mobile
+        function syncGoogleTranslatePlacement() {
+            const deskG = document.getElementById('google_translate_element');
+            const mobG = document.getElementById('google_translate_element_mobile');
+            if (!deskG || !mobG) return;
+            if (window.innerWidth < 1024 && deskG.children.length > 0) {
+                mobG.appendChild(deskG.firstElementChild);
+            } else if (window.innerWidth >= 1024 && mobG.children.length > 0) {
+                deskG.appendChild(mobG.firstElementChild);
+            }
+        }
+        setTimeout(syncGoogleTranslatePlacement, 1200);
+        window.addEventListener('resize', syncGoogleTranslatePlacement);
+
+        // Security Check & Set Avatar Initials on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const storedName = localStorage.getItem('userName');
+            if(storedName) {
+                const letter = storedName.charAt(0).toUpperCase();
+                document.getElementById('desktop-avatar-letter').innerText = letter;
+            } else {
+                // Security Check: Redirect if not logged in
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>
